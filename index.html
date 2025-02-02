@@ -6,61 +6,53 @@
     <title>Para Mi Hermosa Paula ❤️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
         body {
-            font-family: 'Dancing Script', cursive;
-            background: linear-gradient(135deg, #ffccd5, #ffb3d9);
-            color: #ff3366;
-            text-align: center;
             margin: 0;
-            overflow: hidden;
             padding: 0;
+            font-family: 'Sacramento', cursive;
+            background-color: #ffccd5;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1500x1000.png'); /* Fondo opcional */
+            background-size: cover;
+            background-position: center;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: #ff3366;
             margin-top: 50px;
-            text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.6);
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .contenedor {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 80vh;
         }
 
         .corazones {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: -1;
+            pointer-events: none;
         }
 
         .corazones span {
             position: absolute;
-            bottom: -10px;
             background-color: #ff4d6d;
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             transform: rotate(-45deg);
-            animation: subir 5s linear infinite;
+            animation: subir 4s linear infinite;
+            opacity: 0.7;
         }
 
         .corazones span::before,
@@ -84,37 +76,28 @@
         }
 
         @keyframes subir {
-            0% {
-                transform: translateY(0) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(-45deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(-45deg); opacity: 0; }
         }
 
         .botones {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+            margin-top: 20px;
         }
 
         button {
-            font-size: 18px;
+            font-size: 1.2rem;
             padding: 15px 30px;
+            margin: 10px;
             border: none;
-            border-radius: 25px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            font-family: 'Sacramento', cursive;
+            transition: transform 0.3s ease;
+            display: inline-block;
         }
 
         .si {
             background-color: #ff6699;
             color: white;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
 
         .si:hover {
@@ -125,20 +108,13 @@
         .no {
             background-color: #ffb3c1;
             color: white;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-        }
-
-        .no:hover {
-            background-color: #ff99a6;
-            transform: scale(1.1);
         }
 
         .mensaje-final {
             display: none;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #ff3366;
-            margin-top: 20px;
-            animation: confeti 1s infinite;
+            animation: confeti 0.5s infinite;
         }
 
         @keyframes confeti {
@@ -147,20 +123,40 @@
             100% { transform: scale(1); }
         }
 
-        /* Fondo animado */
-        .corazones span {
-            animation: subir 7s ease-in-out infinite;
+        /* Responsividad para dispositivos pequeños */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+        }
+
+        /* Para dispositivos muy pequeños */
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
         }
 
     </style>
 </head>
 <body>
+
     <div class="corazones"></div>
 
     <div class="contenedor">
         <h1>Paula, ¿quieres ser mi San Valentín? ❤️</h1>
         <div class="botones">
-            <button class="si" onclick="respuestaSi()">Sí, claro ❤️</button>
+            <button class="si" onclick="respuestaSi()">Sí ❤️</button>
             <button class="no" onmouseover="moverBoton(this)">No 😢</button>
         </div>
         <p class="mensaje-final" id="mensaje">¡Sabía que dirías que sí! Te amo, mi hermosa niña ❤️</p>
@@ -189,6 +185,7 @@
                 setTimeout(() => corazon.remove(), 5000);
             }
         }
+
         setInterval(crearCorazones, 500);
     </script>
 </body>
