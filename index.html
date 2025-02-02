@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Hermosa Paula ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+        body {
+            text-align: center;
+            font-family: 'Sacramento', cursive;
+            background-color: #ffccd5;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #ff3366;
+            margin-top: 50px;
+        }
+
+        .contenedor {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .corazones {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .corazones span {
+            position: absolute;
+            bottom: -10px;
+            background-color: #ff4d6d;
+            width: 15px;
+            height: 15px;
+            transform: rotate(-45deg);
+            animation: subir 5s linear infinite;
+        }
+
+        .corazones span::before,
+        .corazones span::after {
+            content: '';
+            position: absolute;
+            background-color: #ff4d6d;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .corazones span::before {
+            top: -7px;
+            left: 0;
+        }
+
+        .corazones span::after {
+            top: 0;
+            left: 7px;
+        }
+
+        @keyframes subir {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        .botones {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .si {
+            background-color: #ff6699;
+            color: white;
+        }
+
+        .si:hover {
+            background-color: #ff3366;
+            transform: scale(1.1);
+        }
+
+        .no {
+            background-color: #ffb3c1;
+            color: white;
+            position: absolute;
+        }
+
+        @keyframes confeti {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .mensaje-final {
+            display: none;
+            font-size: 2rem;
+            color: #ff3366;
+            animation: confeti 0.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="corazones"></div>
+
+    <div class="contenedor">
+        <h1>Paula, ¿quieres ser mi San Valentín? ❤️</h1>
+        <div class="botones">
+            <button class="si" onclick="respuestaSi()">Sí ❤️</button>
+            <button class="no" onmouseover="moverBoton(this)">No 😢</button>
+        </div>
+        <p class="mensaje-final" id="mensaje">¡Sabía que dirías que sí! Te amo, mi hermosa niña ❤️</p>
+    </div>
+
+    <script>
+        function respuestaSi() {
+            document.getElementById("mensaje").style.display = "block";
+        }
+
+        function moverBoton(boton) {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            boton.style.left = x + "px";
+            boton.style.top = y + "px";
+        }
+
+        function crearCorazones() {
+            const contenedor = document.querySelector(".corazones");
+            for (let i = 0; i < 20; i++) {
+                let corazon = document.createElement("span");
+                corazon.style.left = Math.random() * 100 + "vw";
+                corazon.style.animationDuration = Math.random() * 3 + 2 + "s";
+                contenedor.appendChild(corazon);
+                setTimeout(() => corazon.remove(), 5000);
+            }
+        }
+        setInterval(crearCorazones, 500);
+    </script>
+</body>
+</html>
